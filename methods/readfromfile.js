@@ -29,12 +29,13 @@ module.exports.getAddressFromTextFile = function(filepath) {
       let addressList = file.content.split('\n'),
           addressObject = {}
 
-      addressList.forEach((address)=>{
-        if(address.length > 0){
-          addressObject[address] = true
+      addressList.forEach((address) => {
+        let cleanAddress = address.replace(/\r/g, '').trim()  // <<< This is the fix
+        if (cleanAddress.length > 0) {
+          addressObject[cleanAddress] = true
         }
       })
-
+      
       return Object.keys(addressObject)
     }
 
